@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package protobuf;
+
+import "protos/contact.proto";
+import "protos/task.proto";
+
+service Service {
+	// CRUD for Contact
+	rpc CreateContact(Contact) returns (Contact);
+	rpc GetContact(ByIdReq) returns (Contact);
+	rpc ListContact(ListReq) returns (ListRespContact);
+	rpc UpdateContact(Contact) returns (Contact);
+	rpc DeleteContact(ByIdReq) returns (EmptyResp);
+	
+	// CRUD for Tasks
+	rpc CreateTask(Task) returns (Task);
+	rpc GetTask(ByIdReq) returns (Task);
+	rpc ListTask(ListReq) returns (ListRespTask);
+	rpc UpdateTask(Task) returns (Task);
+	rpc DeleteTask(ByIdReq) returns (EmptyResp);
+}

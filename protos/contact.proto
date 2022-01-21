@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package protobuf;
+
+message Contact {
+	string  id = 1;
+	string firstName = 2;
+	string lastName = 3;
+	string phone = 4;
+	string email = 5;
+	string position = 6;
+}
+
+message ByIdReq {
+	string id = 1;
+}
+
+message ListReq {
+	int64 page = 1;
+	int64 limit = 2;
+}
+
+message ListRespContact {
+	repeated Contact contacts = 1;
+	int64 count = 2;
+}
+
+message EmptyResp {}

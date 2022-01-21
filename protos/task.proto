@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package protobuf;
+
+message Task {
+	string  id = 1;
+	string name = 2;
+	string status = 3;
+	string priority = 4;
+	string createdAt = 5;
+	string createdBy = 6;
+	string dueDate = 7;
+}
+
+message ListRespTask {
+	repeated Task tasks = 1;
+	int64 count = 2;
+}
