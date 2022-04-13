@@ -9,10 +9,10 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/reflection"
 
+	"github.com/muhriddinsalohiddin/udevs/bot/api/handlers"
 	"github.com/muhriddinsalohiddin/udevs/bot/bot"
 	"github.com/muhriddinsalohiddin/udevs/bot/config"
 	pb "github.com/muhriddinsalohiddin/udevs/bot/genproto"
-	"github.com/muhriddinsalohiddin/udevs/bot/handlers"
 	"google.golang.org/grpc"
 )
 
@@ -30,7 +30,6 @@ func (*Server) Sender(ctx context.Context, input *pb.Content) (*empty.Empty, err
 	message.Text = input.Text
 
 	List = append(List, message)
-
 	return &empty.Empty{}, nil
 }
 
@@ -46,7 +45,7 @@ func main() {
 	pb.RegisterBotServer(s, &Server{})
 	reflection.Register(s)
 
-	log.Println("Server is running in port :" + conf.RpcPort)
+	log.Printf("Server is running in port %v" + conf.RpcPort)
 
 	if err = s.Serve(lis); err != nil {
 		log.Fatalf("Problem with connecting to GRPC Server: %v", err)
@@ -61,11 +60,11 @@ func CuncurrentSending() {
 			if message.Priority == "high" {
 				err := bot.BotService(List[i].Text)
 				if err != nil {
-					log.Fatalf("Problem with sending message to bot: %v", err)
+					log.Printf("Problem with sending message to bot: %v", err)
 				} else {
 					isSend = true
 					Remove(i)
-					time.Sleep(time.Second * 5)
+					time.Sleep(time.Second * 40)
 
 					break
 				}
@@ -80,11 +79,11 @@ func CuncurrentSending() {
 			if message.Priority == "medium" {
 				err := bot.BotService(List[i].Text)
 				if err != nil {
-					log.Fatalf("Problem with sending message to bot: %v", err)
+					log.Printf("Problem with sending message to bot: %v", err)
 				} else {
 					isSend = true
 					Remove(i)
-					time.Sleep(time.Second * 5)
+					time.Sleep(time.Second * 40)
 
 					break
 				}
@@ -97,11 +96,11 @@ func CuncurrentSending() {
 			if message.Priority == "low" {
 				err := bot.BotService(List[i].Text)
 				if err != nil {
-					log.Fatalf("Problem with sending message to bot: %v", err)
+					log.Printf("Problem with sending message to bot: %v", err)
 				} else {
 					isSend = true
 					Remove(i)
-					time.Sleep(time.Second * 5)
+					time.Sleep(time.Second * 40)
 					break
 				}
 			}

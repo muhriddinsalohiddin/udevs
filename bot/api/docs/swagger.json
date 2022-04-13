@@ -6,7 +6,6 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:8000",
     "basePath": "/",
     "paths": {
         "/send": {
@@ -18,12 +17,14 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Massage"
+                ],
                 "summary": "MessageSender",
-                "operationId": "message_sender",
                 "parameters": [
                     {
                         "description": "message_content",
-                        "name": "input",
+                        "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {

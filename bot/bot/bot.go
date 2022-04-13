@@ -18,7 +18,7 @@ func BotService(text string) (err error) {
 
 	id, err := strconv.ParseInt(conf.ChatId, 10, 64)
 	if err != nil {
-		log.Fatalf("Problem with converting chatId to int64: %v", err)
+		log.Printf("Problem with converting chatId to int64: %v", err)
 		return
 	}
 
@@ -28,7 +28,7 @@ func BotService(text string) (err error) {
 
 	msg := tgbotapi.NewMessage(id, text)
 	if _, err := bot.Send(msg); err != nil {
-		log.Fatalf("Problem with sending message: %v", err)
+		log.Printf("Problem with sending message: %v", err)
 		return err
 	}
 

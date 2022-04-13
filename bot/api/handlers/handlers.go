@@ -12,24 +12,24 @@ type Message struct {
 	Priority string `json:"priority"`
 }
 
+// @BasePath /v1
+
 // @Summary MessageSender
 // @Description send message
-// @ID message_sender
+// @Tags Massage
 // @Accept json
 // @Produce json
-// @Param input body Message true "message_content"
+// @Param Massage request body Message true "message_content"
 // @Success 200
 // @Failure 400
-// @Router /send [post]
-func SendMessageAPI(ctx *gin.Context) {
-
+// @Router /send/ [post]
+func SendMessageAPI(c *gin.Context) {
 	var newMessage Message
-	err := ctx.BindJSON(&newMessage)
+	err := c.ShouldBindJSON(&newMessage)
 	if err != nil {
-		log.Fatalf("Problem with getting message from API Server: %v", err)
+		log.Printf("Problem with getting message from API Server: %v", err)
 	}
-
 	status := client.Stub(newMessage.Text, newMessage.Priority)
 
-	ctx.AbortWithStatus(status)
+	c.AbortWithStatus(status)
 }

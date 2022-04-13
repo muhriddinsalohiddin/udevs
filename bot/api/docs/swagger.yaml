@@ -7,7 +7,6 @@ definitions:
       text:
         type: string
     type: object
-host: localhost:8000
 info:
   contact: {}
   description: Telegram Bot which sends messages to channels and groups
@@ -19,11 +18,10 @@ paths:
       consumes:
       - application/json
       description: send message
-      operationId: message_sender
       parameters:
       - description: message_content
         in: body
-        name: input
+        name: request
         required: true
         schema:
           $ref: '#/definitions/handlers.Message'
@@ -35,4 +33,6 @@ paths:
         "400":
           description: ""
       summary: MessageSender
+      tags:
+      - Massage
 swagger: "2.0"

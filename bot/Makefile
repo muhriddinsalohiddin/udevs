@@ -18,4 +18,4 @@ submodule-update:
 	git submodule update --init --recursive --remote
 swag-gen:
 	# echo ${REGISTRY}
-	swag init -g api/routers.go -o api/docs
+	swag init -g api/api.go -o api/docs
